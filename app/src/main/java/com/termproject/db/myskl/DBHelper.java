@@ -27,19 +27,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlRecipe);
 
         String sqlPersonal = "CREATE TABLE IF NOT EXISTS PERSONAL ("
-                + "id text primary key references INFO(id), "
+                + "id text references INFO(id), "
                 + "num_recipe integer primary key references RECIPE(num_recipe));";
         db.execSQL(sqlPersonal);
 
         String sqlIngredient = "CREATE TABLE IF NOT EXISTS INGREDIENT ("
                 + "num_recipe integer primary key references RECIPE(num_recipe), "
-                + "ingredient text primary key, "
-                + "icategory text);";
+                + "ingredient text);";
         db.execSQL(sqlIngredient);
 
         String sqlFood = "CREATE TABLE IF NOT EXISTS FOOD ("
                 + "num_recipe integer primary key references RECIPE(num_recipe), "
-                + "food text primary key references RECIPE(food), "
+                + "food text references RECIPE(food), "
                 + "fcategory text);";
         db.execSQL(sqlFood);
     }
