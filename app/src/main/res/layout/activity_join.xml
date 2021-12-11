@@ -16,10 +16,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/join_name"
@@ -32,26 +32,25 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/join_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이메일"
-                android:inputType="textEmailAddress"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_pw"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,14 +58,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="TouchTargetSizeCheck"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_pwck"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -91,25 +92,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<Button
-        android:id="@+id/check_button"
-        style="@style/defaultButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="확인"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.33" />-->
-
     <Button
         android:id="@+id/joinB_button"
         style="@style/defaultButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:text="회원가입"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        android:text="가입하기"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
 
     <Button
         android:id="@+id/cancel_button"
@@ -117,13 +107,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="취소"
-        app:layout_constraintTop_toBottomOf="@+id/joinB_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/joinB_button"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="40dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="208dp" />
+        app:layout_constraintGuide_begin="128dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
