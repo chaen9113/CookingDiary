@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,18 +20,21 @@ import com.google.android.material.textfield.TextInputLayout;
 public class JoinActivity extends AppCompatActivity {
 
     TextInputLayout layoutName, layoutEmail, layoutPw, layoutPwck;
-    String  name, email, pw, pwck;
+    String name, email, pw, pwck;
     String dbEm = "";
     DBHelper dbHelper;
-    boolean emCheck = false;  //이메일 사용가능 여부
+    boolean emCheck = true;  //이메일 사용가능 여부
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         // DBHelper 생성
-        if(dbHelper == null) {
+        if (dbHelper == null) {
             dbHelper = new DBHelper(this);
         }
         // 데이터베이스 읽고 쓸 수 있도록 설정
@@ -55,7 +59,7 @@ public class JoinActivity extends AppCompatActivity {
         // 회원가입 버튼
         Button joinB = findViewById(R.id.joinB_button);
         // 회원정보 입력 전 - 버튼 비활성화
-        if(name.isEmpty() || email.isEmpty() || pw.isEmpty() || pwck.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || pw.isEmpty() || pwck.isEmpty()) {
             joinB.setClickable(false);
             joinB.setEnabled(false);
         }
@@ -75,9 +79,9 @@ public class JoinActivity extends AppCompatActivity {
                 } else {
                     layoutName.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
-                    if(e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
-                    || p.getText().toString().isEmpty() || p.length() < 6
-                    || !pc.getText().toString().equals(p.getText().toString())) {
+                    if (e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                            || p.getText().toString().isEmpty() || p.length() < 6
+                            || !pc.getText().toString().equals(p.getText().toString())) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
                     } else {  // 버튼 활성화
@@ -103,9 +107,9 @@ public class JoinActivity extends AppCompatActivity {
                 } else {
                     layoutEmail.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
-                    if(n.getText().toString().isEmpty() || n.length() < 2
-                    || p.getText().toString().isEmpty() || p.length() < 6
-                    || !pc.getText().toString().equals(p.getText().toString())) {
+                    if (n.getText().toString().isEmpty() || n.length() < 2
+                            || p.getText().toString().isEmpty() || p.length() < 6
+                            || !pc.getText().toString().equals(p.getText().toString())) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
                     } else {  // 버튼 활성화
@@ -122,6 +126,7 @@ public class JoinActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
             @Override
             public void afterTextChanged(Editable s) {
                 // 비밀번호 조건 만족하지 않은 경우 오류
@@ -130,9 +135,9 @@ public class JoinActivity extends AppCompatActivity {
                 } else {
                     layoutPw.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
-                    if(n.getText().toString().isEmpty() || n.length() < 2
-                    || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
-                    || !pc.getText().toString().equals(p.getText().toString())) {
+                    if (n.getText().toString().isEmpty() || n.length() < 2
+                            || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                            || !pc.getText().toString().equals(p.getText().toString())) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
                     } else {  // 버튼 활성화
@@ -149,6 +154,7 @@ public class JoinActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
             @Override
             public void afterTextChanged(Editable s) {
                 // 비밀번호 확인 조건 만족하지 않은 경우 오류
@@ -157,9 +163,9 @@ public class JoinActivity extends AppCompatActivity {
                 } else {
                     layoutPwck.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
-                    if(n.getText().toString().isEmpty() || n.length() < 2
-                    || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
-                    || p.getText().toString().isEmpty() || p.length() < 6) {
+                    if (n.getText().toString().isEmpty() || n.length() < 2
+                            || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                            || p.getText().toString().isEmpty() || p.length() < 6) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
                     } else {  // 버튼 활성화
@@ -170,7 +176,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        // 회원가입 버튼 동작
+        // 가입하기 버튼 동작
         joinB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,10 +190,10 @@ public class JoinActivity extends AppCompatActivity {
 
                         // 입력정보와 데이터 비교
                         if (!e.getText().toString().equals(dbEm)) {
-                            // 이메일 사용가능
+                            // 데이터와 불일치, 이메일 사용가능
                             emCheck = true;
                         } else {
-                            // 이메일 중복
+                            // 데이터와 일치, 이메일 중복
                             emCheck = false;
                             break;
                         }
@@ -197,7 +203,7 @@ public class JoinActivity extends AppCompatActivity {
                     // DB가 null 이면 이메일 사용가능
                     emCheck = true;
 
-               /*  회원가입 동작  */
+                /*  회원가입 동작  */
                 if (emCheck) {
                     // 이메일 사용가능 시 DB에 회원정보 저장
                     assert db != null;
