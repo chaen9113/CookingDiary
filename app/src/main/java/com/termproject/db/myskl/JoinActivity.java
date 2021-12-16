@@ -1,4 +1,4 @@
-package com.termproject.db.myskl;
+package com.termproject.cookingdiary;
 
 import android.content.DialogInterface;
 import android.content.Intent;
