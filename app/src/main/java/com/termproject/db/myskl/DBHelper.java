@@ -1,10 +1,9 @@
-package com.termproject.cookingdiary;
+package com.termproject.db.myskl;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-//데이터베이스 스키마 생성
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "database";
     public static final int DATABASE_VERSION = 1;
@@ -29,17 +28,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String sqlPersonal = "CREATE TABLE IF NOT EXISTS PERSONAL ("
                 + "id text primary key references INFO(id), "
-                + "count integer);";
+                + "num_recipe integer primary key references RECIPE(num_recipe));";
         db.execSQL(sqlPersonal);
 
         String sqlIngredient = "CREATE TABLE IF NOT EXISTS INGREDIENT ("
-                + "num_recipe integer primary key autoincrement references  RECIPE(num_recipe), "
-                + "ingredient text);";
+                + "num_recipe integer primary key references RECIPE(num_recipe), "
+                + "ingredient text primary key, "
+                + "icategory text);";
         db.execSQL(sqlIngredient);
 
         String sqlFood = "CREATE TABLE IF NOT EXISTS FOOD ("
-                + "num_recipe integer primary key autoincrement references RECIPE(num_recipe), "
-                + "food text references RECIPE(food), "
+                + "num_recipe integer primary key references RECIPE(num_recipe), "
+                + "food text primary key references RECIPE(food), "
                 + "fcategory text);";
         db.execSQL(sqlFood);
     }
