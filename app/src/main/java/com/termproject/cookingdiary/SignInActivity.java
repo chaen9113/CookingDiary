@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // 로그인 버튼
         Button login = findViewById(R.id.login_button);
-        // 로그인 정보 입력 전 - 버튼 비활성화
+        // 입력하지 않은 초기 상태에 로그인 비활성화
         if (email.isEmpty() || pw.isEmpty()) {
             login.setClickable(false);
             login.setEnabled(false);
@@ -140,16 +140,18 @@ public class SignInActivity extends AppCompatActivity {
                     // 데이터 일치하면, id 값을 전달하며 로그인
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("id", dbEm);
-                    //로그인 한 회원 개인의 테이블로 설정하는 과정. PERSONAL 테이블에 사용자 아이디 값을 넣어준다.
+                    //로그인 한 회원 개인의 테이블로 설정하는 과정.
+                    // PERSONAL 테이블에 사용자 아이디 값을 넣어준다.
                     db.execSQL("DELETE FROM PERSONAL");
                     db.execSQL("INSERT INTO PERSONAL(id) VALUES ('" + dbEm + "');");
                     startActivity(intent);
 
                 } else {
-                    // 데이터 일치하지 않으면, 메세지 팝업
+                    // 일치하지 않으면, 메세지 팝업
                     new AlertDialog.Builder(SignInActivity.this)
                             .setTitle(null)
-                            .setMessage("이메일 또는 비밀번호가 일치하지 않습니다.\n입력한 내용을 다시 확인해 주세요.")
+                            .setMessage("이메일 또는 비밀번호가 일치하지 않습니다." +
+                                    "\n입력한 내용을 다시 확인해 주세요.")
                             .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

@@ -40,6 +40,7 @@ public class JoinActivity extends AppCompatActivity {
         // 데이터베이스 읽고 쓸 수 있도록 설정
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+
         // Text 입력창 가리키는 변수
         layoutName = findViewById(R.id.layout_name);
         layoutEmail = findViewById(R.id.layout_email);
@@ -67,9 +68,12 @@ public class JoinActivity extends AppCompatActivity {
         // 이름 입력창 내용 변화 감지
         n.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -79,7 +83,8 @@ public class JoinActivity extends AppCompatActivity {
                 } else {
                     layoutName.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
-                    if (e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                    if (e.getText().toString().isEmpty()
+                            || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
                             || p.getText().toString().isEmpty() || p.length() < 6
                             || !pc.getText().toString().equals(p.getText().toString())) {
                         joinB.setClickable(false);
@@ -95,9 +100,12 @@ public class JoinActivity extends AppCompatActivity {
         // 이메일 입력창 내용 변화 감지
         e.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -123,9 +131,12 @@ public class JoinActivity extends AppCompatActivity {
         // 비밀번호 입력창 내용 변화 감지
         p.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -136,7 +147,8 @@ public class JoinActivity extends AppCompatActivity {
                     layoutPw.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
                     if (n.getText().toString().isEmpty() || n.length() < 2
-                            || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                            || e.getText().toString().isEmpty()
+                            || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
                             || !pc.getText().toString().equals(p.getText().toString())) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
@@ -151,9 +163,12 @@ public class JoinActivity extends AppCompatActivity {
         // 비밀번호 확인 입력창 내용 변화 감지
         pc.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -164,7 +179,8 @@ public class JoinActivity extends AppCompatActivity {
                     layoutPwck.setError(null);
                     // 다른 입력창 오류 시 버튼 비활성화 유지
                     if (n.getText().toString().isEmpty() || n.length() < 2
-                            || e.getText().toString().isEmpty() || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
+                            || e.getText().toString().isEmpty()
+                            || !e.getText().toString().matches("(.*)@(.*)+\\.(.*)")
                             || p.getText().toString().isEmpty() || p.length() < 6) {
                         joinB.setClickable(false);
                         joinB.setEnabled(false);
@@ -176,7 +192,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        // 가입하기 버튼 동작
+        // 회원가입 버튼 동작
         joinB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,10 +206,10 @@ public class JoinActivity extends AppCompatActivity {
 
                         // 입력정보와 데이터 비교
                         if (!e.getText().toString().equals(dbEm)) {
-                            // 데이터와 불일치, 이메일 사용가능
+                            // 이메일 사용가능
                             emCheck = true;
                         } else {
-                            // 데이터와 일치, 이메일 중복
+                            // 이메일 중복
                             emCheck = false;
                             break;
                         }
